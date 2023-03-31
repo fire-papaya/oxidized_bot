@@ -1,1 +1,1 @@
-mod entry_aggregate;
+pub mod entry_aggregate;

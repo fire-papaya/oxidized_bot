@@ -1,1 +1,1 @@
-mod entry_command;
+pub mod entry_command;

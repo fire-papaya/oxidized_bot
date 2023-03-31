@@ -1,1 +1,1 @@
-mod entry_service;
+pub mod entry_service;
