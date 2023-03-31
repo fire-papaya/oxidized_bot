@@ -1,5 +1,6 @@
 mod enums;
 mod domain;
+mod service;
 
 use teloxide::prelude::*;
 use teloxide::utils::command::BotCommands;

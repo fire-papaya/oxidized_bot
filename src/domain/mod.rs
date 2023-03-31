@@ -1,2 +1,4 @@
-mod command_handler;
-mod event_handler;
+mod error;
+mod aggregate;
+mod command;
+mod event;

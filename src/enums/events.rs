@@ -1,8 +1,8 @@
 use serde::{Serialize, Deserialize};
 
 #[derive(Debug, Clone, Serialize, Deserialize, PartialEq)]
-pub enum ContestEntryEvent {
-    CodeGenerated {
+pub enum EntryEvent {
+    EntryCreated {
         user_id: String,
         contest_id: String,
         code: String,
