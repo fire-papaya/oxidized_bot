@@ -1,8 +1,11 @@
 use serde::Deserialize;
+use crate::domain::command::GenericCommand;
 
-#[derive(Debug, Deserialize)]
+#[derive(Debug, Deserialize, Eq, PartialEq)]
 pub enum EntryCommand {
-    GenerateCode { user_id: String },
+    GenerateCode,
     UploadPrimeImage,
     UploadPaintedImage,
 }
+
+impl GenericCommand for EntryCommand {}

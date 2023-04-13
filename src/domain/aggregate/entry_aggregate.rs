@@ -18,7 +18,7 @@ impl Aggregate for Entry {
     type Command = EntryCommand;
     type Event = EntryEvent;
     type Error = EntryError;
-    type Services = BankAccountServices;
+    type Services = EntryService;
 
     // This identifier should be unique to the system.
     fn aggregate_type() -> String {
@@ -45,10 +45,12 @@ impl Aggregate for Entry {
             }
 
             EntryEvent::PrimeImageUploaded { .. } => {
+                // add image into db and save entry relation
                 todo!()
             }
 
             EntryEvent::FinalImageUploaded { .. } => {
+                // add image into db and save entry relation
                 todo!()
             }
         }
