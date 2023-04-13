@@ -9,14 +9,14 @@ use crate::domain::error::EntryError;
 pub struct UploadPrimeImageCommand {}
 
 impl Handler<EntryCommand> for UploadPrimeImageCommand {
-    fn supports(handleable: EntryCommand) -> bool {
+    fn supports(&self, handleable: EntryCommand) -> bool {
         return handleable == EntryCommand::UploadPrimeImage
     }
 }
 
 #[async_trait]
 impl CommandHandler<EntryCommand, EntryEvent, EntryError> for UploadPrimeImageCommand {
-    async fn handle(command: EntryCommand) -> Result<Vec<EntryEvent>, EntryError> {
+    async fn handle(&self, command: EntryCommand) -> Result<Vec<EntryEvent>, EntryError> {
         todo!()
     }
 }
