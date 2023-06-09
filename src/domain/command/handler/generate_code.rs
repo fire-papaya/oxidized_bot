@@ -9,14 +9,15 @@ use crate::domain::error::EntryError;
 pub struct GenerateCodeCommand {}
 
 impl Handler<EntryCommand> for GenerateCodeCommand {
-    fn supports(&self, handleable: EntryCommand) -> bool {
-        return handleable == EntryCommand::GenerateCode
+    fn supports(&self, handleable: &EntryCommand) -> bool {
+        return *handleable == EntryCommand::GenerateCode
     }
 }
 
 #[async_trait]
 impl CommandHandler<EntryCommand, EntryEvent, EntryError> for GenerateCodeCommand {
-    async fn handle(&self, command: EntryCommand) -> Result<Vec<EntryEvent>, EntryError> {
+    async fn handle(&self, command: &EntryCommand) -> Result<Vec<EntryEvent>, EntryError> {
+        println!("Generate code with command {:?}", command);
         todo!()
     }
 }

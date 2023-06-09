@@ -12,6 +12,6 @@ trait GenericCommand {}
 pub trait CommandHandler<C: GenericCommand, V: DomainEvent, E: Error>: Handler<C> {
     async fn handle(
         &self,
-        command: C,
+        command: &C,
     ) -> Result<Vec<V>, E>;
 }
