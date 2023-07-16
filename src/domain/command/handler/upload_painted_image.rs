@@ -2,7 +2,7 @@ use async_trait::async_trait;
 use crate::domain::command::CommandHandler;
 use crate::domain::handler::Handler;
 use crate::domain::command::entry_command::EntryCommand;
-use crate::domain::event::entry_event::EntryEvent;
+use crate::domain::event::ContestEvent;
 use crate::domain::error::EntryError;
 
 
@@ -15,8 +15,8 @@ impl Handler<EntryCommand> for UploadPaintedImageCommand {
 }
 
 #[async_trait]
-impl CommandHandler<EntryCommand, EntryEvent, EntryError> for UploadPaintedImageCommand {
-    async fn handle(&self, command: &EntryCommand) -> Result<Vec<EntryEvent>, EntryError> {
+impl CommandHandler<EntryCommand, ContestEvent, EntryError> for UploadPaintedImageCommand {
+    async fn handle(&self, command: &EntryCommand) -> Result<Vec<ContestEvent>, EntryError> {
         println!("Upload PAINTED image with command {:?}", command);
         todo!()
     }

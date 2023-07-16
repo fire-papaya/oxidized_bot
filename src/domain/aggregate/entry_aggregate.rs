@@ -2,7 +2,7 @@ use async_trait::async_trait;
 use cqrs_es::Aggregate;
 use serde::{Deserialize, Serialize};
 use crate::domain::command::entry_command::EntryCommand;
-use crate::domain::event::entry_event::EntryEvent;
+use crate::domain::event::ContestEvent;
 use crate::domain::error::EntryError;
 use crate::service::entry_service::EntryService;
 
@@ -16,7 +16,7 @@ pub struct Entry {
 #[async_trait]
 impl Aggregate for Entry {
     type Command = EntryCommand;
-    type Event = EntryEvent;
+    type Event = ContestEvent;
     type Error = EntryError;
     type Services = EntryService;
 
@@ -39,17 +39,17 @@ impl Aggregate for Entry {
     // update here
     fn apply(&mut self, event: Self::Event) {
         match event {
-            EntryEvent::EntryCreated { .. } => {
+            ContestEvent::EntryCreated { .. } => {
                 self.entry_id = 0;
                 self.code = String::from("111111");
             }
 
-            EntryEvent::PrimeImageUploaded { .. } => {
+            ContestEvent::PrimeImageUploaded { .. } => {
                 // add image into db and save entry relation
                 todo!()
             }
 
-            EntryEvent::FinalImageUploaded { .. } => {
+            ContestEvent::FinalImageUploaded { .. } => {
                 // add image into db and save entry relation
                 todo!()
             }

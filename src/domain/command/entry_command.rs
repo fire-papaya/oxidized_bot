@@ -1,7 +1,7 @@
 use std::boxed::Box;
 use serde::Deserialize;
 use crate::domain::command::{CommandHandler, GenericCommand};
-use crate::domain::event::entry_event::EntryEvent;
+use crate::domain::event::ContestEvent;
 use crate::domain::error::EntryError;
 use crate::domain::command::handler::*;
 use crate::domain::command::handler::generate_code::GenerateCodeCommand;
@@ -18,12 +18,12 @@ pub enum EntryCommand {
 impl GenericCommand for EntryCommand {}
 
 pub struct EntryCommandHandler {
-    handlers: Vec<Box<dyn CommandHandler<EntryCommand, EntryEvent, EntryError>>>
+    handlers: Vec<Box<dyn CommandHandler<EntryCommand, ContestEvent, EntryError>>>
 }
 
 impl EntryCommandHandler {
     pub fn new() -> Self {
-        let handlers: Vec<Box<dyn CommandHandler<EntryCommand, EntryEvent, EntryError>>> = vec![
+        let handlers: Vec<Box<dyn CommandHandler<EntryCommand, ContestEvent, EntryError>>> = vec![
             Box::new(GenerateCodeCommand{}),
             Box::new(UploadPrimeImageCommand{}),
             Box::new(UploadPaintedImageCommand{}),
