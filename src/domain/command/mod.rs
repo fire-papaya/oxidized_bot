@@ -6,7 +6,7 @@ use cqrs_es::DomainEvent;
 use std::error::Error;
 use crate::domain::handler::Handler;
 
-trait GenericCommand {}
+pub trait GenericCommand {}
 
 #[async_trait]
 pub trait CommandHandler<C: GenericCommand, V: DomainEvent, E: Error>: Handler<C> {
