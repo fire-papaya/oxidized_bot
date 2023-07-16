@@ -2,7 +2,7 @@ use cqrs_es::DomainEvent;
 use serde::{Serialize, Deserialize};
 
 #[derive(Debug, Clone, Serialize, Deserialize, PartialEq)]
-pub enum EntryEvent {
+pub enum ContestEvent {
     EntryCreated {
         user_id: String,
         contest_id: String,
@@ -18,12 +18,12 @@ pub enum EntryEvent {
     },
 }
 
-impl DomainEvent for EntryEvent {
+impl DomainEvent for ContestEvent {
     fn event_type(&self) -> String {
         let event_type: &str = match self {
-            EntryEvent::EntryCreated { .. } => "EntryCreated",
-            EntryEvent::PrimeImageUploaded { .. } => "PrimeImageUploaded",
-            EntryEvent::FinalImageUploaded { .. } => "FinalImageUploaded",
+            ContestEvent::EntryCreated { .. } => "EntryCreated",
+            ContestEvent::PrimeImageUploaded { .. } => "PrimeImageUploaded",
+            ContestEvent::FinalImageUploaded { .. } => "FinalImageUploaded",
         };
         event_type.to_string()
     }
