@@ -5,11 +5,12 @@ use teloxide::Bot;
 
 use crate::domain::command::CommandHandler;
 use crate::domain::command::GenericCommand;
+use crate::domain::event::ContestEvent;
 
 
 pub struct PaintContestBot {
     bot: Bot,
-    command_handler: Box<dyn CommandHandler<dyn GenericCommand, dyn DomainEvent, dyn Error>>,
+    command_handler: Box<dyn CommandHandler<dyn GenericCommand, ContestEvent, dyn Error>>,
     bot_name: String,
     creator: String,
     token: String
@@ -22,15 +23,15 @@ impl PaintContestBot {
 }
 
 #[derive(Default)]
-struct BotBuilder {
-    command_handler: Option<Box<dyn CommandHandler<dyn GenericCommand, dyn DomainEvent, dyn Error>>>,
+pub struct BotBuilder {
+    command_handler: Option<Box<dyn CommandHandler<dyn GenericCommand, ContestEvent, dyn Error>>>,
     bot_name: Option<String>,
     creator: Option<String>,
     token: Option<String>
 }
 
 impl BotBuilder {
-    pub fn new() -> BotBuilder {
+    fn new() -> BotBuilder {
         BotBuilder {
             command_handler: None,
             bot_name: None,
@@ -60,24 +61,22 @@ impl BotBuilder {
             panic!("ERROR: CommandHandler for bot is not specified")
         }
 
-        if self.token.is_none() {
-            panic!("ERROR: TelegramApi token is not specified")
+        match &self.token {
+            Some(t) => log::info!("Token is set to {}", t[..6].to_string() + &String::from("...")),
+            None => panic!("ERROR: Telegram bot token is not specified")
         }
 
-        if self.creator.is_none() {
-            panic!("ERROR: Telegram bot creator is not specified")
+        match self.creator {
+            Some(ref c) => log::info!("Creator is set to {}", &c),
+            None => panic!("ERROR: Telegram bot creator is not specified")
         }
 
-        if self.bot_name.is_none() {
-            panic!("ERROR: Telegram BotName is not specified")
+        match self.bot_name {
+            Some(ref bn) => log::info!("BotName is set to {}", &bn),
+            None => panic!("ERROR: Telegram BotName is not specified")
         }
 
-
-        log::info!("Hello, it's {}", self.bot_name.unwrap());
-        log::info!("Made by {}", self.creator.unwrap());
-        log::info!("With token {}", self.token.unwrap()[..6] + "...");
-
-        let bot = Bot::new(self.token);
+        let bot = Bot::new(self.token.as_ref().unwrap());
 
         PaintContestBot {
             bot: bot,
